@@ -7,18 +7,18 @@ import json
 
 class FileStorage:
     """
-    Serializes instances to a JSON file and deserializes JSON file to instances:
+    Serializes instances to a JSON file and
+    deserializes JSON file to instances:
     """
     __file_path = "file.json"
-    __objects   = {}
-    
-    
+    __objects = {}
+
     def all(self):
         """
         Returns the class __objects property
         """
         return self.__objects
-    
+
     def new(self, obj):
         """
         Sets in __objects the obj with key <obj class name>.id
@@ -37,8 +37,10 @@ class FileStorage:
 
     def reload(self):
         """
-        Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
-        otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
+        Deserializes the JSON file to __objects
+        (only if the JSON file (__file_path) exists
+        otherwise, do nothing. If the file doesn’t exist,
+        no exception should be raised)
         """
         try:
             with open(self.__file_path, encoding="utf-8") as json_file:
