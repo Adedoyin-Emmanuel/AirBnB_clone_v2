@@ -31,7 +31,7 @@ class TestStorageClassModel(unittest.TestCase):
 
     def test_init_without_argument(self):
         """Test the initilization without argument"""
-        self.assertEqual(type(FileStorage), FileStorage)
+        self.assertEqual(type(FileStorage()), FileStorage)
 
 
 if __name__ == '__main__':
