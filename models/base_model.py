@@ -2,7 +2,7 @@
 """
 Base class declaration module for other classes
 """
-
+from models import engine
 from uuid import uuid4
 from datetime import datetime
 
