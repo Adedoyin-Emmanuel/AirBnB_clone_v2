@@ -22,19 +22,18 @@ class BaseModel:
             when an instance is created
             and it will be updated every time you change your object
         """
-
-        if '__class__' in kwargs:
-            del kwargs['__class__']
-
-        for key in ('created_at', 'updated_at'):
-            if key in kwargs:
-                kwargs[key] = datetime.strptime(
-                    kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
-        self.__dict__.update(kwargs)
-
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if not kwargs:
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            self.id = str(uuid4())
+        else:
+            if '__class__' in kwargs:
+                del kwargs['__class__']
+            for value in ('created_at', 'updated_at'):
+                if value in kwargs:
+                    kwargs[value] = datetime.fromisoformat(
+                        kwargs[value])
+            self.__dict__.update(kwargs)
 
     def __str__(self):
         """
