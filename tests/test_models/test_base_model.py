@@ -81,7 +81,7 @@ class BaseModelTest(unittest.TestCase):
         sleep(0.5)
         base_model2 = BaseModel()
         sleep(0.5)
-        self.assertNotEqual(base_model1.created_at, base_model2.created_)
+        self.assertNotEqual(base_model1.created_at, base_model2.updated_at)
     
     def test_if_to_dict_returns_dict_type(self):
         """
