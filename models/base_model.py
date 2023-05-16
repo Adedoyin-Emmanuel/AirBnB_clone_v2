@@ -2,7 +2,10 @@
 """
 Base class declaration module for other classes
 """
-from models import engine
+try:
+    from models import storage
+except ImportError:
+    pass
 from uuid import uuid4
 from datetime import datetime
 
