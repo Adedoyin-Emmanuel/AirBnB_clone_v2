@@ -96,7 +96,7 @@ class BaseModelTest(unittest.TestCase):
         to_dict method returns an iso format string.
         """
         base_model = BaseModel()
-        self.assertEqual(base_model.to_dict(), ["created_at"],
+        self.assertEqual(base_model.to_dict()["created_at"],
                          base_model.created_at.isoformat())
 
     def test_if_updated_at_returned_by_to_dict_is_iso_string(self):
