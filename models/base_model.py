@@ -5,6 +5,7 @@ Base class declaration module for other classes
 
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
