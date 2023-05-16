@@ -5,7 +5,7 @@ Base class declaration module for other classes
 
 from uuid import uuid4
 from datetime import datetime
-
+from models import storage
 
 class BaseModel:
     """
@@ -26,6 +26,7 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             self.id = str(uuid4())
+            storage.new(self)
         else:
             if '__class__' in kwargs:
                 del kwargs['__class__']
@@ -48,6 +49,7 @@ class BaseModel:
         current datetime
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
