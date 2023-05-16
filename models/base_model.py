@@ -5,6 +5,7 @@ Base class declaration module for other classes
 
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -23,7 +24,6 @@ class BaseModel:
             and it will be updated every time you change your object
         """
 
-        from models import storage
         if not kwargs:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
@@ -46,7 +46,6 @@ class BaseModel:
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        from models import storage
         """
         updates the public instance attribute updated_at with the
         current datetime
