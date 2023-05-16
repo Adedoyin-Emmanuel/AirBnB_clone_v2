@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Base class for the storage model
+Base class for the storage model
 """
 import json
 from models.base_model import BaseModel
