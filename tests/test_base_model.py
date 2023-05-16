@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Unit test file for the BaseModel class."""
 import unittest
 import os
