@@ -1,11 +1,16 @@
 #!/usr/bin/python3
-"""Base class declaration for other classes"""
+"""
+Base class declaration module for other classes
+"""
+
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-    """Base class model declaration"""
+    """
+    Base class model declaration
+    """
 
     def __init__(self, *args, **kwargs):
         """
@@ -17,6 +22,7 @@ class BaseModel:
             when an instance is created
             and it will be updated every time you change your object
         """
+
         if '__class__' in kwargs:
             del kwargs['__class__']
 
@@ -31,17 +37,23 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def __str__(self):
-        """Returns the string representation of the Base class model."""
+        """
+        Returns the string representation of the Base class model.
+        """
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """updates the public instance attribute updated_at with the
-        current datetime"""
+        """
+        updates the public instance attribute updated_at with the
+        current datetime
+        """
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        """Returns the dict representation of the Base class model."""
+        """
+        Returns the dict representation of the Base class model.
+        """
         custom_dict = {}
         custom_dict.update(self.__dict__)
         custom_dict.update({'__class__': type(self).__name__})
