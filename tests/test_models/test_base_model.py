@@ -5,7 +5,7 @@ import os
 from time import sleep
 from datetime import datetime
 from uuid import uuid4
-
+import models
 from models.base_model import BaseModel
 
 
