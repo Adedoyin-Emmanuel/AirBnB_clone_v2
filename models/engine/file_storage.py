@@ -31,7 +31,7 @@ class FileStorage:
         """
         with open(self.__file_path, mode='w') as json_file:
             dictionary_storage = {}
-            for key, value in self.__dict__.items():
+            for key, value in self.__objects.items():
                 dictionary_storage[key] = value.to_dict()
             json.dump(dictionary_storage, json_file)
 
@@ -47,4 +47,4 @@ class FileStorage:
                 for object in json.load(json_file).values():
                     self.new(eval(object["__class__"])(**object))
         except FileNotFoundError:
-            pass
+            return
