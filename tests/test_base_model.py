@@ -50,14 +50,14 @@ class BaseModelTest(unittest.TestCase):
         Test if the created_at property is a type of datetime.
         """
         base_model = BaseModel()
-        self.assertTrue(type(base_model.created_at), datetime.datetime)
+        self.assertTrue(type(base_model.created_at), datetime)
 
     def test_updated_at_is_type_datetime(self):
         """
         Test if the updated_at property is a type of datetime.
         """
         base_model = BaseModel()
-        self.assertTrue(type(base_model.updated_at), datetime.datetime)
+        self.assertTrue(type(base_model.updated_at), datetime)
 
     def test_updated_at_is_equal_to_created_at_initially(self):
         """
