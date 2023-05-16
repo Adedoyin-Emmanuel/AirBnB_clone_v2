@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Base class declaration for other classes"""
 from uuid import uuid4
 from datetime import datetime
