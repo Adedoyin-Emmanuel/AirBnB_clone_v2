@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Test suite for the User class in models.user"""
+"""Test cases for the user class in models.user"""
 import unittest
 from models.base_model import BaseModel
 
@@ -7,7 +7,7 @@ from models.user import User
 
 
 class TestUser(unittest.TestCase):
-    """Test cases against the User class"""
+    """Test cases for the user class model"""
 
     def test_attrs_are_class_attrs(self):
         """Test the the attributes are class attributes"""
