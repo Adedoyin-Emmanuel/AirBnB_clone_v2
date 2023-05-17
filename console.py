@@ -5,10 +5,14 @@ from shlex import split
 import re
 import models
 from models.base_model import BaseModel
+from models.user import User
+
 
 all_classes = [
     "BaseModel",
+    "User"
 ]
+
 
 def parse_args_with_brackets(args, brackets):
     """This function parses the arguments with brackets"""
@@ -22,6 +26,7 @@ def parse_args_with_brackets(args, brackets):
 
     return cleaned_lexer
 
+
 def parse(args):
     """Base console parsing function"""
     brackets = re.search(r"\[(.*?)\]", args)
@@ -34,18 +39,18 @@ def parse(args):
     else:
         parse_args_with_brackets(args, curly_brackets)
 
+
 def check_args(args):
     """
     Checks if args is valid
-    
     args(string)
-    
+
     Returns error is args is None or invalid class
     else returns the arguments
     """
     argument_list = parse(args)
-    
-    if(len(argument_list) == 0):
+
+    if (len(argument_list) == 0):
         print("** class name missing **")
     elif argument_list[0] not in all_classes:
         print("** class doesn't exist **")
@@ -187,4 +192,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-    
