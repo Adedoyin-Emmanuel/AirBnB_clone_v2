@@ -30,7 +30,7 @@ def parse_args_with_brackets(args, brackets):
 def parse(args):
     """Base console parsing function"""
     brackets = re.search(r"\[(.*?)\]", args)
-    curly_brackets = re.search("\{(.*?)\}", args)
+    curly_brackets = re.search(r"\{(.*?)\}", args)
     if curly_brackets is None:
         if brackets is None:
             return [i.strip() for i in split(args)]
