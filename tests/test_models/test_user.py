@@ -24,4 +24,3 @@ class TestUser(unittest.TestCase):
         self.assertIs(type(user.last_name), str)
         self.assertTrue(user.first_name == "")
         self.assertTrue(user.last_name == "")
-
