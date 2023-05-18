@@ -22,10 +22,12 @@ class BaseModel:
             when an instance is created
             and it will be updated every time you change your object
         """
+        from models import storage
         if not kwargs:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             self.id = str(uuid4())
+            storage.new(self)
         else:
             if '__class__' in kwargs:
                 del kwargs['__class__']
@@ -43,11 +45,13 @@ class BaseModel:
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
+        from models import storage
         """
         updates the public instance attribute updated_at with the
         current datetime
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """

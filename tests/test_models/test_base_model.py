@@ -72,7 +72,7 @@ class BaseModelTest(unittest.TestCase):
         """
         base_model = BaseModel(None)
         self.assertNotIn(None, base_model.__dict__.values())
-    
+
     def test_2_models_created_at_values(self):
         """
         Test 2 different models created_at property.
@@ -82,30 +82,32 @@ class BaseModelTest(unittest.TestCase):
         base_model2 = BaseModel()
         sleep(0.5)
         self.assertNotEqual(base_model1.created_at, base_model2.updated_at)
-    
+
     def test_if_to_dict_returns_dict_type(self):
         """
         Test if the to_dict_returns_dict_type
         """
         base_model = BaseModel()
         self.assertTrue(type(base_model.to_dict()) is dict)
-    
+
     def test_if_created_at_returned_by_to_dict_is_iso_string(self):
         """
-        Test if the created_at returned by the 
+        Test if the created_at returned by the
         to_dict method returns an iso format string.
         """
         base_model = BaseModel()
-        self.assertEqual(base_model.to_dict()["created_at"], base_model.created_at.isoformat())
-    
+        self.assertEqual(base_model.to_dict()["created_at"],
+                         base_model.created_at.isoformat())
+
     def test_if_updated_at_returned_by_to_dict_is_iso_string(self):
         """
-        Test if the update_at returned by the 
+        Test if the update_at returned by the
         to_dict method returns an iso format string.
         """
         base_model = BaseModel()
-        self.assertEqual(base_model.to_dict()["updated_at"], base_model.updated_at.isoformat())
-    
-    
+        self.assertEqual(base_model.to_dict()["updated_at"],
+                         base_model.updated_at.isoformat())
+
+
 if __name__ == '__main__':
     unittest.main()
