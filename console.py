@@ -14,7 +14,12 @@ from models.review import Review
 
 all_classes = [
     "BaseModel",
-    "User"
+    "User",
+    "City",
+    "Place",
+    "State",
+    "Review"
+    "Amenity"
 ]
 
 
