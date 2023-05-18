@@ -45,9 +45,17 @@ def parse(args):
         if brackets is None:
             return [i.strip() for i in split(args)]
         else:
-            parse_args_with_brackets(args, brackets)
+            #parse_args_with_brackets(args, brackets)
+            lexer = split(args[:brackets.span()[0]])
+            retl = [i.strip(",") for i in lexer]
+            retl.append(brackets.group())
+            return retl
     else:
-        parse_args_with_brackets(args, curly_brackets)
+        #parse_args_with_brackets(args, curly_brackets)
+        lexer = split(args[:curly_brackets.span()[0]])
+        retl = [i.strip(",") for i in lexer]
+        retl.append(curly_brackets.group())
+        return retl
 
 
 def check_args(args):
@@ -160,9 +168,9 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** no instance found **")
 
+
     def do_update(self, argv):
-        """Updates an instance based on the class name and id by adding or
-        updating attribute and save it to the JSON file."""
+        """Updates an instance based on the class name and id with a dictionary representation."""
         arg_list = check_args(argv)
         if arg_list:
             if len(arg_list) == 1:
@@ -171,20 +179,24 @@ class HBNBCommand(cmd.Cmd):
                 instance_id = "{}.{}".format(arg_list[0], arg_list[1])
                 if instance_id in storage.all():
                     if len(arg_list) == 2:
-                        print("** attribute name missing **")
-                    elif len(arg_list) == 3:
-                        print("** value missing **")
+                        print("** dictionary missing **")
                     else:
                         obj = storage.all()[instance_id]
-                        if arg_list[2] in type(obj).__dict__:
-                            v_type = type(obj.__class__.__dict__[arg_list[2]])
-                            setattr(obj, arg_list[2], v_type(arg_list[3]))
-                        else:
-                            setattr(obj, arg_list[2], arg_list[3])
+                        try:
+                            # Convert dictionary representation to a dictionary object
+                            dictionary = eval(arg_list[2])
+                            if isinstance(dictionary, dict):
+                                for key, value in dictionary.items():
+                                    setattr(obj, key, value)
+                                storage.save()  # Save changes to the JSON file
+                                print("Instance updated successfully.")
+                            else:
+                                print("** invalid dictionary representation **")
+                        except (SyntaxError, NameError):
+                            print("** invalid dictionary representation **")
                 else:
                     print("** no instance found **")
 
-            storage.save()
 
     def do_count(self, arg):
         """Retrieve the number of instances of a class"""
