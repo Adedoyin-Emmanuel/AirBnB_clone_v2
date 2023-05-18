@@ -5,6 +5,7 @@ from shlex import split
 import re
 import models
 from models.base_model import BaseModel
+from models import storage
 from models.user import User
 from models.city import City
 from models.amenity import Amenity
@@ -71,7 +72,6 @@ class HBNBCommand(cmd.Cmd):
     """Base class for AirBnB Console
     """
     prompt = "(hbnb) "
-    storage = models.storage
 
     def emptyline(self):
         """Command to executed when empty line + <ENTER> key"""
@@ -116,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
         args = check_args(argv)
         if args:
             print(eval(args[0])().id)
-            self.storage.save()
+            storage.save()
 
     def do_show(self, argv):
         """Prints the string representation of an instance based
@@ -127,16 +127,16 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 key = "{}.{}".format(args[0], args[1])
-                if key not in self.storage.all():
+                if key not in storage.all():
                     print("** no instance found **")
                 else:
-                    print(self.storage.all()[key])
+                    print(storage.all()[key])
 
     def do_all(self, argv):
         """Prints all string representation of all instances based or not
         based on the class name"""
         arg_list = split(argv)
-        objects = self.storage.all().values()
+        objects = storage.all().values()
         if not arg_list:
             print([str(obj) for obj in objects])
         else:
@@ -154,9 +154,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 key = "{}.{}".format(*arg_list)
-                if key in self.storage.all():
-                    del self.storage.all()[key]
-                    self.storage.save()
+                if key in storage.all():
+                    del storage.all()[key]
+                    storage.save()
                 else:
                     print("** no instance found **")
 
@@ -169,13 +169,13 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 instance_id = "{}.{}".format(arg_list[0], arg_list[1])
-                if instance_id in self.storage.all():
+                if instance_id in storage.all():
                     if len(arg_list) == 2:
                         print("** attribute name missing **")
                     elif len(arg_list) == 3:
                         print("** value missing **")
                     else:
-                        obj = self.storage.all()[instance_id]
+                        obj = storage.all()[instance_id]
                         if arg_list[2] in type(obj).__dict__:
                             v_type = type(obj.__class__.__dict__[arg_list[2]])
                             setattr(obj, arg_list[2], v_type(arg_list[3]))
@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** no instance found **")
 
-            self.storage.save()
+            storage.save()
 
     def do_count(self, arg):
         """Retrieve the number of instances of a class"""
